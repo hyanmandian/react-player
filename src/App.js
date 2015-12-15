@@ -60,7 +60,7 @@ export default class App extends Component {
           onProgress={this.onProgress}
           soundcloudConfig={this.state.soundcloudConfig}
           vimeoConfig={this.state.vimeoConfig}
-          youtubeConfig={this.state.youtubeConfig}
+          youtubeConfig={{ preload: true }}
           onPlay={() => console.log('onPlay')}
           onPause={() => console.log('onPause')}
           onBuffer={() => console.log('onBuffer')}
