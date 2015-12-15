@@ -11,7 +11,7 @@ export default class App extends Component {
     loaded: 0
   }
   load = url => {
-    this.setState({ url, playing: true })
+    setTimeout(() => this.setState({ url, playing: true }), 3000)
   }
   playPause = () => {
     this.setState({ playing: !this.state.playing })
