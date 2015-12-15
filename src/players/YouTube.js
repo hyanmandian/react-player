@@ -21,6 +21,12 @@ export default class YouTube extends Base {
   static canPlay (url) {
     return MATCH_URL.test(url)
   }
+  componentDidMount () {
+    if (!this.props.url && this.props.youtubeConfig.preload) {
+      this.priming = true
+      this.play(BLANK_VIDEO_URL)
+    }
+  }
   getSDK () {
     if (window[SDK_GLOBAL]) {
       return Promise.resolve(window[SDK_GLOBAL])
@@ -64,9 +70,6 @@ export default class YouTube extends Base {
     if (state.data === YT.PlayerState.PAUSED) this.props.onPause()
     if (state.data === YT.PlayerState.BUFFERING) this.props.onBuffer()
     if (state.data === YT.PlayerState.ENDED) this.props.onEnded()
-  }
-  prime () {
-    this.play(BLANK_VIDEO_URL)
   }
   pause () {
     if (!this.player) return

@@ -26,7 +26,11 @@ export default class Vimeo extends Base {
   componentDidMount () {
     window.addEventListener('message', this.onMessage, false)
     this.iframe = this.refs.iframe
-    super.componentDidMount()
+
+    if (!this.props.url && this.props.vimeoConfig.preload) {
+      this.priming = true
+      this.play(BLANK_VIDEO_URL)
+    }
   }
   play (url) {
     if (url) {
@@ -39,9 +43,6 @@ export default class Vimeo extends Base {
     } else {
       this.postMessage('play')
     }
-  }
-  prime () {
-    this.play(BLANK_VIDEO_URL)
   }
   pause () {
     this.postMessage('pause')

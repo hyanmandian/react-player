@@ -5,12 +5,6 @@ import { propTypes, defaultProps } from '../props'
 export default class Base extends Component {
   static propTypes = propTypes
   static defaultProps = defaultProps
-  componentDidMount () {
-    if (!this.props.url && this.prime) {
-      this.priming = true
-      this.prime()
-    }
-  }
   componentWillUnmount () {
     this.stop()
   }
@@ -38,6 +32,7 @@ export default class Base extends Component {
   onReady = () => {
     this.setVolume(this.props.volume)
     if (this.props.playing || this.priming) {
+      this.priming = false
       this.play()
     }
   }
