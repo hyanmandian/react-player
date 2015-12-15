@@ -28,7 +28,7 @@ export default class Vimeo extends Base {
     this.iframe = this.refs.iframe
 
     if (!this.props.url && this.props.vimeoConfig.preload) {
-      this.priming = true
+      this.preloading = true
       this.play(BLANK_VIDEO_URL)
     }
   }

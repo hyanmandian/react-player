@@ -23,7 +23,7 @@ export default class YouTube extends Base {
   }
   componentDidMount () {
     if (!this.props.url && this.props.youtubeConfig.preload) {
-      this.priming = true
+      this.preloading = true
       this.play(BLANK_VIDEO_URL)
     }
   }

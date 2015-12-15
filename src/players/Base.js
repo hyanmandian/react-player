@@ -31,8 +31,8 @@ export default class Base extends Component {
   }
   onReady = () => {
     this.setVolume(this.props.volume)
-    if (this.props.playing || this.priming) {
-      this.priming = false
+    if (this.props.playing || this.preloading) {
+      this.preloading = false
       this.play()
     }
   }
