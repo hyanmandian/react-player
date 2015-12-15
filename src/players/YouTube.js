@@ -8,6 +8,7 @@ const SDK_URL = '//www.youtube.com/iframe_api'
 const SDK_GLOBAL = 'YT'
 const MATCH_URL = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
 const PLAYER_ID = 'youtube-player'
+const BLANK_VIDEO_URL = 'https://www.youtube.com/watch?v=GlCmAC4MHek'
 const DEFAULT_PLAYER_VARS = {
   autoplay: 0,
   controls: 0,
@@ -63,6 +64,9 @@ export default class YouTube extends Base {
     if (state.data === YT.PlayerState.PAUSED) this.props.onPause()
     if (state.data === YT.PlayerState.BUFFERING) this.props.onBuffer()
     if (state.data === YT.PlayerState.ENDED) this.props.onEnded()
+  }
+  prime () {
+    this.play(BLANK_VIDEO_URL)
   }
   pause () {
     if (!this.player) return

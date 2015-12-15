@@ -9,6 +9,10 @@ export default class Base extends Component {
   static defaultProps = defaultProps
   componentDidMount () {
     this.update()
+    if (!this.props.url && this.prime) {
+      this.priming = true
+      this.prime()
+    }
   }
   componentWillUnmount () {
     this.stop()
@@ -52,7 +56,7 @@ export default class Base extends Component {
   }
   onReady = () => {
     this.setVolume(this.props.volume)
-    if (this.props.playing) {
+    if (this.props.playing || this.priming) {
       this.play()
     }
   }
