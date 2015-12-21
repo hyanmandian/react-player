@@ -29,20 +29,21 @@ export default class Vimeo extends Base {
 
     if (!this.props.url && this.props.vimeoConfig.preload) {
       this.preloading = true
-      this.play(BLANK_VIDEO_URL)
+      this.load(BLANK_VIDEO_URL)
     }
+
+    super.componentDidMount()
   }
-  play (url) {
-    if (url) {
-      const id = url.match(MATCH_URL)[3]
-      const iframeParams = {
-        ...DEFAULT_IFRAME_PARAMS,
-        ...this.props.vimeoConfig.iframeParams
-      }
-      this.iframe.src = IFRAME_SRC + id + '?' + stringify(iframeParams)
-    } else {
-      this.postMessage('play')
+  load (url) {
+    const id = url.match(MATCH_URL)[3]
+    const iframeParams = {
+      ...DEFAULT_IFRAME_PARAMS,
+      ...this.props.vimeoConfig.iframeParams
     }
+    this.iframe.src = IFRAME_SRC + id + '?' + stringify(iframeParams)
+  }
+  play () {
+    this.postMessage('play')
   }
   pause () {
     this.postMessage('pause')
